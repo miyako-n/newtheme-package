@@ -1,0 +1,18 @@
+{
+  "name": "NewTheme-package",
+  "version": "1.0.0",
+  "description": "For creating a new theme.",
+  "main": "index.js",
+  "repository": "https://github.com/miyako-n/newtheme-package",
+  "author": "Miyako[KinoDesigns]",
+  "license": "MIT",
+  "path" : {
+    "assetsDir" : "./assets/"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.4",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-sass": "^4.0.1"
+  }
+}
