@@ -1,35 +1,44 @@
 require('es6-promise').polyfill();
 
-var base = require('buildsettings.js');
 var gulp = require('gulp');
 
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
+var wait = require('gulp-wait'); //発火時間をずらす
+var plumber = require('gulp-plumber'); //エラーでwatchを止めないようにする
+
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
+var pleeease = require('gulp-pleeease'); //sassの最適化
 
-var imagemin = require('gulp-imagemin');
-var pngquant = require('imagemin-mozjpeg');
-var mozjpeg = require('imagemin-mozjpeg');
+var imagemin = require('gulp-imagemin'); //画像を圧縮
+var pngquant = require('imagemin-pngquant'); //画像最適化png
+var mozjpeg = require('imagemin-mozjpeg'); //画像最適化jpg
 
-//Publish
-gulp.task('publish', function() {
-  return gulp.src(./)
-  .pipe(gulp.dest('../app/public/wp-content/themes/' + base.themaFolder))
+var setting = require('./buildsettings.js'); //初期設定ファイル
+
+//追加・更新のあったphpファイルをコピー
+gulp.task('copyfile', function() {
+  return gulp.src('src/**/*.php')
+  .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themaFolder))
 });
 
 //Sass
 gulp.task('sass', function() {
-  return gulp.src('./assets/sass/**/*.sass')
+  gulp.src('src/**/*.sass')
+  .pipe(wait(500))
+  .pipe(plumber())
   .pipe(sass())
-  .pipe(autoprefixer())
-  .pipe(gulp.dest('../app/public/wp-content/themes/newtheme'))
+  .pipe(pleeease({
+    'minifire': true
+  }))
+  .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themaFolder))
 });
 
-//ImageMin
+//ImageMin：画像の圧縮と最適化
 gulp.task('imageMin', function() {
-  return gulp.src('./assets/images/**/*')
+  return gulp.src('./src/assets/img/**/*')
   .pipe(imageMin([
     pngquant({
       quality: '65-80',
@@ -44,19 +53,25 @@ gulp.task('imageMin', function() {
     imagemin.optipng(),
     imagemin.gifsicle()
   ]))
-  .pipe(gulp.dest('../app/public/wp-content/themes/newtheme')) //保存場所
+  .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themaFolder + '/assets/img/'))
 });
 
 //BrowserSync
-gulp.task('watch',function() {
+gulp.task('browserSync',function() {
   browserSync.init({
-    proxy: 'http://newtheme.test'
+    proxy: setting.themeDomein
   });
+});
+
+//ファイルの監視
+gulp.task('watch', function(){
+  gulp.watch('src/**/*.php', ['copyfile']);
+  gulp.watch('src/**/*.sass', ['sass']);
+  gulp.watch('src/**/img/**/*', ['imageMin']);
 });
 
 //Default
 gulp.task('default',[
-  'publish',
-  'sass',
+  'browserSync',
   'watch'
 ]);
