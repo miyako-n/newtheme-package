@@ -32,7 +32,7 @@ var themeSign = ( '/*\n'
                 + '\n*/\n\n' );
 var langCode = '@charset "utf-8";\n\n';
 
-//追加・更新のあったphpファイルをコピー
+//phpファイルをコピー
 gulp.task('copyfile', function() {
   return gulp.src('src/**/*.php')
   .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themeFolder))
@@ -54,6 +54,7 @@ gulp.task('sass', function() {
   }))
   .pipe(insert.prepend(themeSign + langCode))
   .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themeFolder))
+  .pipe(browserSync.stream())
 });
 
 //ImageMin：画像の圧縮と最適化
@@ -93,6 +94,9 @@ gulp.task('watch', function(){
 
 //Default
 gulp.task('default',[
+  'copyfile',
+  'sass',
+  'imageMin',
   'browserSync',
   'watch'
 ]);

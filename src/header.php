@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 
-<title><?php if(get_field('seo_title')): ?><?php the_field('seo__title'); ?><? else: ?><?php get_meta_title(); ?><?php endif; ?></title>
-<meta name="description" content="<?php if(get_field('seo__description')): ?><?php the_field('seo__description'); ?><? else: ?><?php bloginfo('description'); ?><?php endif; ?>" />
-<meta name="keywords" content="<?php if(get_field('seo__keyword')): ?><?php the_field('seo__keyword'); ?><? else: ?><?php echo get_option( 'keyword_option' ); ?><?php endif; ?>" />
+<title><?php if(get_field('seo_title')): ?><?php the_field('seo_title'); ?><? else: ?><?php get_meta_title(); ?><?php endif; ?></title>
+<meta name="description" content="<?php if(get_field('seo_description')): ?><?php the_field('seo_description'); ?><? else: ?><?php bloginfo('description'); ?><?php endif; ?>" />
+<meta name="keywords" content="<?php if(get_field('seo_keyword')): ?><?php the_field('seo_keyword'); ?><? else: ?><?php echo get_option( 'keyword_option' ); ?><?php endif; ?>" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
