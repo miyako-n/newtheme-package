@@ -14,15 +14,15 @@
 LocalbyFlywheelを導入し、新規ローカルサイトを立ち上げます。nodeが入っていなければ入れてください。  
 
 ### cloneする
-SitePathのフォルダ直下にこのデータをcloneしてください。  
-名前は特に何でも構いませんが私は先人Sさんの環境にならい「build」というフォルダにしています。  
+`SitePath`のフォルダ直下にこのデータをcloneしてください。  
+名前は特に何でも構いませんが私は先人Sさんの環境にならい**build**というフォルダにしています。  
 
 ### npmかyarnかお好みで
 コマンドバッシュでcloneしてきたフォルダ下に移動し、npmかyarnをインストールしておいてください。  
 
 ### 初期設定ファイルを作成する
-インストールが終わったら同フォルダ内「buildsettings.js」の中身を作成するものにあわせて変更してください。  
-特に注意の必要なこともありませんが「themeDomein」はLocalbyFlywheelで設定した「SiteDomain」にしてください。  
+インストールが終わったら同フォルダ内**buildsettings.js**の中身を作成するものにあわせて変更してください。  
+特に注意の必要なこともありませんが`themeDomein`はLocalbyFlywheelで設定した`SiteDomain`にしてください。  
 
 ### gulp実行
 全て設定が完了すれば
@@ -31,7 +31,7 @@ $ yarn gulp default
 ```
 でgulpを走らせてください。  
 gulpを走らせると諸々のデータが「（LocalbyFlywheelのサイトパス）\app\public\wp-content\themes」フォルダ内に  
-buildsettings.jsで設定したthemeFolderの名前でフォルダが作られ、その中に「build/src/」フォルダ内のデータが、  
+buildsettings.jsで設定した`themeFolder`の名前でフォルダが作られ、その中に「build/src/」フォルダ内のデータが、  
 最適化された状態で吐き出されるようになります。  
 
 ### theme開発
