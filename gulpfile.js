@@ -8,9 +8,11 @@ var reload = browserSync.reload;
 var wait = require('gulp-wait'); //発火時間をずらす
 var plumber = require('gulp-plumber'); //エラーでwatchを止めないようにする
 
-var sass = require('gulp-sass');
+var sass = require('gulp-sass'); //sass
 var autoprefixer = require('gulp-autoprefixer'); //ベンダープレフィックス
 var pleeease = require('gulp-pleeease'); //sassの最適化
+
+var uglify = require('gulp-uglify'); //js圧縮
 
 var imagemin = require('gulp-imagemin'); //画像を圧縮
 var pngquant = require('imagemin-pngquant'); //画像最適化png
@@ -40,7 +42,7 @@ gulp.task('copyfile', function() {
 
 //Sass
 gulp.task('sass', function() {
-  gulp.src('src/assets/sass/**/*.sass')
+  gulp.src('src/assets/sass/**/*.{sass,scss}')
   .pipe(wait(500))
   .pipe(plumber())
   .pipe(sass())
@@ -53,6 +55,15 @@ gulp.task('sass', function() {
     minifier: false,
   }))
   .pipe(insert.prepend(themeSign + langCode))
+  .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themeFolder))
+  .pipe(browserSync.stream())
+});
+
+//js
+gulp.task('js', function() {
+  gulp.src('src/assets/js/**/*.js')
+  .pipe(plumber())
+  .pipe(uglify())
   .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themeFolder))
   .pipe(browserSync.stream())
 });
@@ -88,7 +99,8 @@ gulp.task('browserSync',function() {
 //ファイルの監視
 gulp.task('watch', function(){
   gulp.watch('src/**/*.php', ['copyfile']);
-  gulp.watch('src/**/*.sass', ['sass']);
+  gulp.watch('src/**/*.{sass,scss}', ['sass']);
+  gulp.watch('src/**/*.js', ['js']);
   gulp.watch('src/assets/img/**/*', ['imageMin']);
 });
 
@@ -96,6 +108,7 @@ gulp.task('watch', function(){
 gulp.task('default',[
   'copyfile',
   'sass',
+  'js',
   'imageMin',
   'browserSync',
   'watch'
