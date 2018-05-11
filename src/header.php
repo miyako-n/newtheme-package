@@ -10,9 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>assets/js/libs/jquery.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>assets/js/libs/vue.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>assets/js/libs/vue-scrollto.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/assets/js/libs/vue.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/assets/js/script/common.js" charset="utf-8"></script>
 
 <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/template/favicon/favicon.ico" type="image/vnd.microsoft.icon" />

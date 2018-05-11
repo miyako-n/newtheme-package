@@ -19,6 +19,12 @@ while ( have_posts() ) : the_post();
 
 <?php endwhile; endif; ?>
 
+<div class="test_vue">
+  <span v-if="seen">
+    テストメッセージです
+  </span>
+</div>
+
 </section>
 
 <?php get_footer(); ?>

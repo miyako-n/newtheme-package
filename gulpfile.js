@@ -2,6 +2,8 @@ require('es6-promise').polyfill(); //autoprefixerに必要らしいのでとり�
 
 var gulp = require('gulp');
 
+var runSequence = require('run-sequence'); //タスクの順番を並列・直列処理させる
+
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
@@ -35,6 +37,11 @@ var themeSign = ( '/*\n'
                 + '\n*/\n\n' );
 var langCode = '@charset "utf-8";\n\n';
 
+//themeフォルダを初期化
+gulp.task('clean',function(callback){
+  return del(['../app/public/wp-content/themes/' + setting.themeFolder + '/*'], callback);
+});
+
 //phpファイルをコピー
 gulp.task('copyfile', function() {
   return gulp.src('src/**/*.php')
@@ -43,7 +50,7 @@ gulp.task('copyfile', function() {
 
 //Sass
 gulp.task('sass', function() {
-  gulp.src('src/assets/sass/**/*.{sass,scss}')
+  return gulp.src('src/assets/sass/**/*.{sass,scss}')
   .pipe(wait(500)) //連続更新するとsassがエラーを吐くので対策に入れている
   .pipe(plumber())
   .pipe(sass())
@@ -62,10 +69,10 @@ gulp.task('sass', function() {
 
 //js
 gulp.task('js', function() {
-  gulp.src('src/assets/js/**/*.js')
+  return gulp.src('src/assets/js/**/*.js')
   .pipe(plumber())
   .pipe(uglify())
-  .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themeFolder))
+  .pipe(gulp.dest('../app/public/wp-content/themes/' + setting.themeFolder + '/assets/js/'))
   .pipe(browserSync.stream())
 });
 
@@ -106,11 +113,10 @@ gulp.task('watch', function(){
 });
 
 //Default
-gulp.task('default',[
-  'copyfile',
-  'sass',
-  'js',
-  'imageMin',
+gulp.task('default', function() {
+  runSequence(
+   ['copyfile','sass','js','imageMin'],
   'browserSync',
   'watch'
-]);
+  )
+});

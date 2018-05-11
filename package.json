@@ -26,6 +26,7 @@
     "imagemin-mozjpeg": "^7.0.0",
     "imagemin-pngquant": "^5.1.0",
     "jquery": "^3.3.1",
+    "run-sequence": "^2.2.1",
     "vue": "^2.5.16",
     "vue-scrollto": "^2.11.0",
     "webpack": "^4.8.1"
