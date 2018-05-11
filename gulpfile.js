@@ -1,4 +1,4 @@
-require('es6-promise').polyfill();
+require('es6-promise').polyfill(); //autoprefixerに必要らしいのでとりあえず読み込んでいる
 
 var gulp = require('gulp');
 
@@ -13,6 +13,7 @@ var autoprefixer = require('gulp-autoprefixer'); //ベンダープレフィッ�
 var pleeease = require('gulp-pleeease'); //sassの最適化
 
 var uglify = require('gulp-uglify'); //js圧縮
+var concat = require('gulp-concat'); //ファイルをまとめる
 
 var imagemin = require('gulp-imagemin'); //画像を圧縮
 var pngquant = require('imagemin-pngquant'); //画像最適化png
@@ -43,7 +44,7 @@ gulp.task('copyfile', function() {
 //Sass
 gulp.task('sass', function() {
   gulp.src('src/assets/sass/**/*.{sass,scss}')
-  .pipe(wait(500))
+  .pipe(wait(500)) //連続更新するとsassがエラーを吐くので対策に入れている
   .pipe(plumber())
   .pipe(sass())
   .pipe(pleeease({

@@ -4,7 +4,7 @@
  */
 get_header(); ?>
 
-<section class="contents">
+<section class="contents" id="js-backtop">
 
 <?php
 if( have_posts() ):

@@ -10,12 +10,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link href="<?php bloginfo('stylesheet_url'); ?>" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/jquery-1.10.2.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/common.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>assets/js/libs/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>assets/js/libs/vue.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>assets/js/libs/vue-scrollto.js" charset="utf-8"></script>
+<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/assets/js/script/common.js" charset="utf-8"></script>
 
-<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/customizedAssets/images/template/favicon/favicon.ico" type="image/vnd.microsoft.icon" />
-<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/customizedAssets/images/template/favicon/favicon.ico" type="image/vnd.microsoft.icon" />
-<link rel="apple-touch-icon" sizes="152x152" href="<?php echo get_template_directory_uri(); ?>/customizedAssets/images/template/favicon/favicon.png" />
+<link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/template/favicon/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/template/favicon/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="apple-touch-icon" sizes="152x152" href="<?php echo get_template_directory_uri(); ?>/assets/images/template/favicon/favicon.png" />
 
 </head>
 
